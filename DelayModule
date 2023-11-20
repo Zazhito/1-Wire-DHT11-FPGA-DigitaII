@@ -9,41 +9,41 @@ S_008428D0 .scope module, "DelayModule_tb" "DelayModule_tb" 2 3;
 v0084EEC0_0 .var "clk", 0 0;
 v0084EF18_0 .var "delay", 8 0;
 v0084EF70_0 .net "out_delay", 0 0, v0084EE10_0; 1 drivers
-v00940D20_0 .var "rst", 0 0;
-S_00843F80 .scope module, "uut" "DelayModule" 2 9, 3 1, S_008428D0;
+v01000D18_0 .var "rst", 0 0;
+S_00843F98 .scope module, "uut" "DelayModule" 2 9, 3 1, S_008428D0;
  .timescale -6 -6;
-v00923C40_0 .net "clk", 0 0, v0084EEC0_0; 1 drivers
-v00844008_0 .var "count", 8 0;
-v00844060_0 .net "delay", 8 0, v0084EF18_0; 1 drivers
+v00FE3C38_0 .net "clk", 0 0, v0084EEC0_0; 1 drivers
+v00844020_0 .var "count", 8 0;
+v00844078_0 .net "delay", 8 0, v0084EF18_0; 1 drivers
 v0084EE10_0 .var "out_delay", 0 0;
-v0084EE68_0 .net "rst", 0 0, v00940D20_0; 1 drivers
-E_008446D0 .event posedge, v0084EE68_0, v00923C40_0;
-    .scope S_00843F80;
+v0084EE68_0 .net "rst", 0 0, v01000D18_0; 1 drivers
+E_00844808 .event posedge, v0084EE68_0, v00FE3C38_0;
+    .scope S_00843F98;
 T_0 ;
-    %wait E_008446D0;
+    %wait E_00844808;
     %load/v 8, v0084EE68_0, 1;
     %jmp/0xz  T_0.0, 8;
     %ix/load 0, 9, 0;
-    %assign/v0 v00844008_0, 0, 0;
+    %assign/v0 v00844020_0, 0, 0;
     %ix/load 0, 1, 0;
     %assign/v0 v0084EE10_0, 0, 0;
     %jmp T_0.1;
 T_0.0 ;
-    %load/v 8, v00844008_0, 9;
-    %load/v 17, v00844060_0, 9;
+    %load/v 8, v00844020_0, 9;
+    %load/v 17, v00844078_0, 9;
     %cmp/u 8, 17, 9;
     %jmp/0xz  T_0.2, 4;
     %ix/load 0, 1, 0;
     %assign/v0 v0084EE10_0, 0, 1;
     %ix/load 0, 9, 0;
-    %assign/v0 v00844008_0, 0, 0;
+    %assign/v0 v00844020_0, 0, 0;
     %jmp T_0.3;
 T_0.2 ;
-    %load/v 8, v00844008_0, 9;
+    %load/v 8, v00844020_0, 9;
     %mov 17, 0, 23;
     %addi 8, 1, 32;
     %ix/load 0, 9, 0;
-    %assign/v0 v00844008_0, 0, 8;
+    %assign/v0 v00844020_0, 0, 8;
     %ix/load 0, 1, 0;
     %assign/v0 v0084EE10_0, 0, 0;
 T_0.3 ;
@@ -63,11 +63,11 @@ T_1.0 ;
     .thread T_1;
     .scope S_008428D0;
 T_2 ;
-    %set/v v00940D20_0, 1, 1;
-    %movi 8, 60, 9;
+    %set/v v01000D18_0, 1, 1;
+    %movi 8, 6, 9;
     %set/v v0084EF18_0, 8, 9;
     %delay 10, 0;
-    %set/v v00940D20_0, 0, 1;
+    %set/v v01000D18_0, 0, 1;
     %delay 1000, 0;
     %vpi_call 2 32 "$finish";
     %end;

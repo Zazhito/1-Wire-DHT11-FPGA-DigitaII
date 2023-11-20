@@ -23,7 +23,7 @@ module DelayModule_tb;
   initial begin
     // Inicialización de señales
     rst = 1;
-    delay = 60;
+    delay = 6;
     
     // Esperar un poco antes de desactivar el reset
     #10 rst = 0;
