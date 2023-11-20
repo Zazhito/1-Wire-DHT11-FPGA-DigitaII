@@ -5,4 +5,6 @@ El DHT11 es un sensor de Temperatura y Humedad Digital , arroja 40 bits de datos
 
 Lo primero que se realizo fue un divisor de frecuencia, la FPGA tiene un reloj de frecuencia de 25M Hz, el DHT11 trabaja en terminos de micro-segundos, por lo tanto la frecuencia debe estar en 1M Hz, la simulacion la encuentran en DivisorFrecuencia.vcd 
 
-Lo segundo fue realizar un modulo de Delay donde se puede indicar el tiempo de delay, esto es vital porque segun el protocolo 1-Wire dependiendo los tiempos de Delay significan un dato o una accion, por ejemplo , un delay de 480 Microsegundos es para preguntar si los sensores estan listos para transmitir, un delay de 15 microsegundos significa que va a leer el dato del DHT11
+Lo segundo fue realizar un modulo de Delay DelayModule donde se puede indicar el tiempo de delay, esto es vital porque segun el protocolo 1-Wire dependiendo los tiempos de Delay significan un dato o una accion, por ejemplo , un delay de 480 Microsegundos es para preguntar si los sensores estan listos para transmitir, un delay de 15 microsegundos significa que va a leer el dato del DHT11, La simulacion la encuentran en DelayModule.vcd
+
+En tercer lugar se creo el modulo para poder leer los datos ReadModule esto para poder guardar bit por bit de los datos que el DHT11 envia, en este modulo se instancia DelayModule , la simulacion la encuentrar en ReadModule.vcd
