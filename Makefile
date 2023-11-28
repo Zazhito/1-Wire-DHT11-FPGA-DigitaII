@@ -1,7 +1,7 @@
 TARGET=DHT11
 TOP=DHT11
 
-OBJS+=DHT11.v ReadModule.v DelayModule.v DivisorFrecuencia.v
+OBJS+=DHT11.v ReadModule.v DelayModule.v DivisorFrecuencia.v ComunicationModule.v
 
 # TRELLIS=/usr/local/share/trellis
 
@@ -18,8 +18,8 @@ $(TARGET).bit: $(TARGET)_out.config
 	ecppack --svf ${TARGET}.svf $< $@
 
 configure_lattice: ${TARGET}.bit   # TDI:TDO:TCK:TMS
-#	sudo openFPGALoader -c ft232RL --pins=1:2:0:3 -m ${TARGET}.bit 	
-	sudo openFPGALoader -c ft232RL --pins=RXD:RTS:TXD:CTS -m ${TARGET}.bit 
+#	sudo openFPGALoader -c ft232RL --pins=1:2:0:3 -m ${TARGET}.bit
+	sudo openFPGALoader -c ft232RL --pins=RXD:RTS:TXD:CTS -m ${TARGET}.bit
 
 clean:
 	rm -f *.svf *.bit *.config *.json *.ys
