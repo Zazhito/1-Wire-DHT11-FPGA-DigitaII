@@ -1,0 +1,137 @@
+$date
+	Wed Nov 29 17:27:30 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1us
+$end
+$scope module ComunicationModule_tb $end
+$var wire 1 ! tx $end
+$var wire 1 " txdone $end
+$var reg 1 # clk $end
+$var reg 1 $ senddata $end
+$var reg 8 % txbyte [7:0] $end
+$scope module uut $end
+$var wire 1 & clk $end
+$var wire 1 ' senddata $end
+$var wire 1 ! tx $end
+$var wire 8 ( txbyte [7:0] $end
+$var reg 8 ) bits_sent [7:0] $end
+$var reg 8 * buf_tx [7:0] $end
+$var reg 8 + state [7:0] $end
+$var reg 1 , txbit $end
+$var reg 1 - txdone $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0-
+1,
+b0 +
+b0 *
+b0 )
+b11011010 (
+0'
+0&
+b11011010 %
+0$
+0#
+0"
+1!
+$end
+#5
+b11011010 *
+b1 +
+1$
+1'
+1#
+1&
+#10
+0#
+0&
+#15
+b10 +
+0,
+0!
+1#
+1&
+#20
+0#
+0&
+#25
+b1101101 *
+b1 )
+1#
+1&
+#30
+0#
+0&
+#35
+b110110 *
+1,
+1!
+b10 )
+1#
+1&
+#40
+0#
+0&
+#45
+b11011 *
+0,
+0!
+b11 )
+1#
+1&
+#50
+0#
+0&
+#55
+b1101 *
+1,
+1!
+b100 )
+1#
+1&
+#60
+0#
+0&
+#65
+b110 *
+b101 )
+1#
+1&
+#70
+0#
+0&
+#75
+b11 *
+0,
+0!
+b110 )
+1#
+1&
+#80
+0#
+0&
+#85
+b1 *
+1,
+1!
+b111 )
+1#
+1&
+#90
+0#
+0&
+#95
+b0 *
+b1000 )
+1#
+1&
+#100
+0#
+0&
