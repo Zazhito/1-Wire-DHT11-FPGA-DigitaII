@@ -9,8 +9,8 @@ reg [39:0] data;
 reg clk_9600 = 0;
 reg [31:0] cntr_9600 = 32'b0;
 parameter period_9600 = 1302;
-parameter ASCII_0 = 8'd48;
-parameter ASCII_1 = 8'd49;
+parameter ASCII_0 = 1'b1;
+parameter ASCII_1 = 1'b0;
 //parameter ASCII_2 = 8'd50;
 //parameter ASCII_3 = 8'd51;
 //parameter ASCII_4 = 8'd52;
@@ -29,6 +29,9 @@ reg [0:0] D1, D2, D;      // Variables para almacenar datos
 wire out_delay;          // Señal de salida del DelayModule
 reg [8:0] delay1 = 10;    // Delay de 10 ciclos para 1 microsegundo
 reg [8:0] delay2 = 600;   // Delay de 600 ciclos para 60 microsegundos
+reg clk_1 = 0;
+reg [31:0] cntr_1 = 32'b0;
+parameter period_1 = 12500000;
 
 
 
@@ -62,16 +65,26 @@ parameter START = 4'b0001;
 parameter READ = 4'b0010;
 parameter DONE = 4'b0011;
 
- always @ (posedge hwclk) begin
+always @ (posedge clk) begin
         /* generate 9600 Hz clock */
         cntr_9600 <= cntr_9600 + 1;
         if (cntr_9600 == period_9600) begin
             clk_9600 <= ~clk_9600;
             cntr_9600 <= 32'b0;
         end
- end
 
-always @(posedge clk or posedge rst) begin
+        /* generate 1 Hz clock */
+        cntr_1 <= cntr_1 + 1;
+        if (cntr_1 == period_1) begin
+            clk_1 <= ~clk_1;
+            cntr_1 <= 32'b0;
+        end
+    end
+  reg [7:0] count;
+  reg toggle;
+
+
+always @(posedge clk_1 or posedge rst) begin
     if (rst) begin
         state <= IDLE;
         bit_count <= 8'b0;
@@ -79,10 +92,9 @@ always @(posedge clk or posedge rst) begin
     end else begin
         case (state)
             IDLE: begin
-                if (dht11_data == 1'b0) begin
                     state <= START;
                     bit_count <= 8'b0;
-                end
+                
             end
             START: begin
                 state <= READ;
@@ -91,11 +103,6 @@ always @(posedge clk or posedge rst) begin
                 if (bit_count < 8) begin
                     shift_register[bit_count] <= dht11_data;
                     uart_txbyte <= dht11_data;
-                        if (uart_txbyte == ASCII_1) begin
-                            uart_txbyte <= ASCII_0;
-                        end else begin
-                            uart_txbyte <= uart_txbyte + 1;
-                        end
                     bit_count <= bit_count + 1;
                 end else begin
                     state <= DONE;

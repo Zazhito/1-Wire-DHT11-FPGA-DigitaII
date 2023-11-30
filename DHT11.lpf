@@ -9,3 +9,6 @@ LOCATE COMP "dht11_data" SITE "E4";
 IOBUF PORT "dht11_data" IO_TYPE=LVCMOS25;
 
 
+LOCATE COMP "ftdi_tx" SITE "C4";
+IOBUF PORT "ftdi_tx" IO_TYPE=LVCMOS25;
+
