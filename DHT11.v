@@ -11,14 +11,6 @@ reg [31:0] cntr_9600 = 32'b0;
 parameter period_9600 = 1302;
 parameter ASCII_0 = 1'b1;
 parameter ASCII_1 = 1'b0;
-//parameter ASCII_2 = 8'd50;
-//parameter ASCII_3 = 8'd51;
-//parameter ASCII_4 = 8'd52;
-//parameter ASCII_5 = 8'd53;
-//parameter ASCII_6 = 8'd54;
-//parameter ASCII_7 = 8'd55;
-//parameter ASCII_8 = 8'd56;
-//parameter ASCII_9 = 8'd57;
 reg [7:0] uart_txbyte = ASCII_0;
 reg uart_send = 1'b1;
 wire uart_txed;
@@ -41,7 +33,7 @@ parameter period_1 = 12500000;
     .txbyte (uart_txbyte),
     .senddata (uart_send),
     .txdone (uart_txed),
-    .tx (ftdi_tx),
+    .tx (ftdi_tx)
   );
   // Instancia del DelayModule
   DelayModule delay_module (
@@ -83,8 +75,7 @@ always @ (posedge clk) begin
   reg [7:0] count;
   reg toggle;
 
-
-always @(posedge clk_1 or posedge rst) begin
+always @(posedge clk or posedge rst) begin
     if (rst) begin
         state <= IDLE;
         bit_count <= 8'b0;
@@ -102,7 +93,7 @@ always @(posedge clk_1 or posedge rst) begin
             READ: begin
                 if (bit_count < 8) begin
                     shift_register[bit_count] <= dht11_data;
-                    uart_txbyte <= dht11_data;
+		    uart_txbyte[bit_count] <= dht11_data;
                     bit_count <= bit_count + 1;
                 end else begin
                     state <= DONE;
